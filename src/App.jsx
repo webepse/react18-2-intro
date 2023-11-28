@@ -19,6 +19,10 @@ const league = {
    membre4: {
     nom: 'Catwoman',
     age: 33
+   },
+   membre5: {
+    nom: "Robin",
+    age: 25
    }
 }
 
@@ -27,6 +31,19 @@ class App extends Component {
     league: league,
     plus: 2
    }
+
+   componentDidMount() {
+    console.log('montage')
+   }
+
+   componentDidUpdate() {
+    console.log('je recharge mon composant')
+   }
+
+   componentWillUnmount()
+   {
+    console.log('démontage')
+   }
    
   handleClick = (nb) =>{
     const league = {...this.state.league}
@@ -34,33 +51,26 @@ class App extends Component {
     this.setState({league})
   } 
 
-  render() { 
+  render() {
+    const list = Object.keys(this.state.league).map(iteration => {
+      return (
+        <Membre key={iteration} age={this.state.league[iteration].age} nom={this.state.league[iteration].nom} />
+      )
+    })
+    
+
     return (
       <>
         <h1>Hello World!</h1>
-        <Membre 
-          nom={this.state.league.membre1.nom} 
-          age={this.state.league.membre1.age}
-          />
-        <Membre 
-          nom={this.state.league.membre2.nom} 
-          age={this.state.league.membre2.age}
-          />
-        <Membre 
-          nom={this.state.league.membre3.nom} 
-          age={this.state.league.membre3.age}
-          />
-        <Membre 
-          nom={this.state.league.membre4.nom} 
-          age={this.state.league.membre4.age}
-          />
+        {list}
+   
         
 
         <Button 
           plus={this.state.plus}
           veillir={() => this.handleClick(this.state.plus)}
         />
-
+        
       </>
     )
    // return React.createElement('div',{className: 'app'}, React.createElement('h1',null,'Hello World'))
