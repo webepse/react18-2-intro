@@ -52,6 +52,20 @@ class App extends Component {
     this.setState({league})
   } 
 
+  handleChange = (event, id) => {
+    const league = {...this.state.league}
+    const nom = event.target.value
+    league[id].nom = nom
+    this.setState({league:league})
+  }
+
+  hideName = (id) => {
+    const league = {...this.state.league}
+    league[id].nom = "X"
+    league[id].age = 0
+    this.setState({league:league})
+  }
+
   handleShow = () => {
     const isShow = !this.state.isShow 
     this.setState({isShow})
@@ -60,7 +74,13 @@ class App extends Component {
   render() {
     const list = Object.keys(this.state.league).map(iteration => {
       return (
-        <Membre key={iteration} age={this.state.league[iteration].age} nom={this.state.league[iteration].nom} />
+        <Membre 
+          key={iteration}
+          handleChange={(event) => this.handleChange(event, iteration)}
+          hideName={()=> this.hideName(iteration)} 
+          age={this.state.league[iteration].age} 
+          nom={this.state.league[iteration].nom} 
+        />
       )
     })
     
