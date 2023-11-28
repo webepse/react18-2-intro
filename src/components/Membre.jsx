@@ -4,7 +4,7 @@ const Membre = ({nom, children, age}) => {
     // const {nom, children} = props
     return ( 
         <>
-            <h2>Membre :  {nom.toUpperCase()} age: {age}</h2>
+            <h2 style={{backgroundColor: age < 35 ? 'dodgerblue':'crimson', color: 'white'}}>Membre :  {nom.toUpperCase()} age: {age}</h2>
             { children ? <p>{children}</p> : null }
         </>
      );
